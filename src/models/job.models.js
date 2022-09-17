@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { v4: uuidv4 } = require('uuid');
 
 const jobSchema = new mongoose.Schema(
   {
@@ -17,11 +18,16 @@ const jobSchema = new mongoose.Schema(
       enum: ["interview", "declined", "pending"],
       default: "pending",
     },
-    createdBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      require: [true, "Please provide user"],
-    },
+    createdBy:{
+          // type:String,
+          // require:true,
+          // default:uuidv4()
+          type: mongoose.Schema.Types.ObjectId,
+          ref:'user',
+          require:true
+
+    } 
+      
   },
   {
     timestamps: true,
@@ -29,4 +35,4 @@ const jobSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Job", jobSchema);
+module.exports = mongoose.model("job", jobSchema);
